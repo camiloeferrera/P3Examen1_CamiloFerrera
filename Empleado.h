@@ -11,6 +11,9 @@ class Empleado
 		~Empleado();
 		
 		string getNombre();
+		int getNivel();
+		double getHabilidad();
+		double getPereza();
 	private:
 		string nombre;
 		int edad,nivel;

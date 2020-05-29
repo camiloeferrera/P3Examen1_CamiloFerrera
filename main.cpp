@@ -149,8 +149,7 @@ int main() {
 }
 
 void Simulacion(){
-	int opcion,n = 0,contador_dias = 0;
-	bool avanzar = false;
+	int opcion,n = 0;
 	
 	for (int i = 0; i < backlog.size(); i++){
 		n += backlog[i].getCarga();
@@ -160,7 +159,10 @@ void Simulacion(){
 	
 	int tareas_en_progreso = 0, empleados_perezosos = 0 , empleados_fallidos = 0, empleados_exitosos = 0;
 	
-	while (true){								
+	while (true){
+		if(backlog.size() == 0){
+			cout << "PROYECTO TERMINADO" << endl;
+		}								
 		cout << "Dias para terminar el proyecto: " << n << endl << endl
 		<< "1. Siguiente dia" << endl
 		<< "2. Generar Reporte" << endl
@@ -202,8 +204,8 @@ void Simulacion(){
 								}
 								
 								tareas_en_progreso++;
-								break;
 							}
+							break;
 						}
 							
 					}

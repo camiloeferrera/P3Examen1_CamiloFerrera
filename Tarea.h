@@ -13,10 +13,14 @@ class Tarea
 		string getDescripcion();
 		int getNivel();
 		int getCarga();
+		bool isDisponible();
 		void restarCarga();
+		void setDisponible(bool);
+		
 	private:
 		string descripcion;
 		int nivel,carga;
+		bool disponible;
 };
 
 #endif

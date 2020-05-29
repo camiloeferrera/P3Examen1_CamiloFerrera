@@ -13,9 +13,10 @@ vector<Empleado> empleados;
 vector<Tarea> backlog;
 
 int main() {
-	/*empleados.push_back(Empleado("camilo",20,3,90,10));
+	empleados.push_back(Empleado("camilo",20,3,90,10));
 	empleados.push_back(Empleado("juda",20,2,80,20));
-	empleados.push_back(Empleado("paulina",20,1,70,30));*/
+	empleados.push_back(Empleado("paulina",20,1,70,30));
+	
 	int opcion;
 	while (true){
 		cout << "1. Contratar Empleado" << endl
@@ -176,28 +177,43 @@ void Simulacion(){
 				
 				for (int i = 0; i < empleados.size(); i++){
 					for (int j = 0; j < backlog.size(); j++){
-						if (empleados[i].getNivel() >= backlog[i].getNivel()){
-							srand((int)time(0));
-							int hint = rand() % 100;
-							
-							if (empleados[i].getPereza() < hint){
-								if (empleados[i].getHabilidad() >= hint){
-									empleados_exitosos++;
-									backlog.erase(backlog.begin()+j);
+						if (backlog[i].isDisponible() == true){
+							if (empleados[i].getNivel() >= backlog[i].getNivel()){
+								srand((int)time(0));
+								int hint = rand() % 100;
+								
+								backlog[i].setDisponible(false);
+								
+								if (empleados[i].getPereza() < hint){
+									if (empleados[i].getHabilidad() >= hint){
+										empleados_exitosos++;
+										
+										backlog[i].restarCarga();
+										if (backlog[i].getCarga() == 0){
+											backlog.erase(backlog.begin()+j);	
+										}
+										
+										
+									} else {
+										empleados_fallidos++;
+									}
 								} else {
-									empleados_fallidos++;
+									empleados_perezosos++;
 								}
-							} else {
-								empleados_perezosos++;
+								
+								tareas_en_progreso++;
+								break;
 							}
-							
-							tareas_en_progreso++;
-							break;
 						}
+							
 					}
 				}
 				cout << endl;
 				n--;
+				
+				for (int i = 0; i < backlog.size(); i++){
+					backlog[i].setDisponible(true);
+				}
 				
 				break;
 			}

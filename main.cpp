@@ -13,10 +13,6 @@ vector<Empleado> empleados;
 vector<Tarea> backlog;
 
 int main() {
-	empleados.push_back(Empleado("camilo",20,3,90,10));
-	empleados.push_back(Empleado("juda",20,2,80,20));
-	empleados.push_back(Empleado("paulina",20,1,70,30));
-	
 	int opcion;
 	while (true){
 		cout << "1. Contratar Empleado" << endl
